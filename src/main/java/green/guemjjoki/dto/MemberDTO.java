@@ -1,5 +1,6 @@
 package green.guemjjoki.dto;
 
+import green.guemjjoki.entitiy.Member;
 import green.guemjjoki.entitiy.entityEnum.Gender;
 import green.guemjjoki.entitiy.entityEnum.Rank;
 import lombok.AllArgsConstructor;
@@ -23,4 +24,5 @@ public class MemberDTO {
 	private String name;
 	private String address;
 	private Rank rank;
+
 }

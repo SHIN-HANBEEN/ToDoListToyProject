@@ -1,5 +1,6 @@
 package green.guemjjoki.entitiy;
 
+import green.guemjjoki.dto.MemberDTO;
 import green.guemjjoki.entitiy.entityEnum.Gender;
 import green.guemjjoki.entitiy.entityEnum.Rank;
 import jakarta.persistence.*;
@@ -50,4 +51,6 @@ public class Member{
 	@OneToMany(mappedBy = "writer")
 	private List<TodoBoard> todoBoard;
 	//oneToMany 1 : N 관게니까 게시물 글은 여러개라 List Type 이여야겠죠~
+
+
 }

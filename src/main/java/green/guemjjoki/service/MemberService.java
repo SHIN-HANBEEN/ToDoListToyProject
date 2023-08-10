@@ -8,21 +8,20 @@ import org.springframework.data.domain.Page;
 
 
 public interface MemberService {
-
-
     default Member dtoToEntity(MemberDTO dto){
         Member member = Member.builder()
-                        .memberId(dto.getMemberId())
-                        .password(dto.getPassword())
-                        .email(dto.getEmail())
-                        .gender(dto.getGender())
-                        .name(dto.getName())
-                        .address(dto.getAddress())
-                        .rank(dto.getRank())
-                        .build();
+                .memberId(dto.getMemberId())
+                .password(dto.getPassword())
+                .email(dto.getEmail())
+                .gender(dto.getGender())
+                .name(dto.getName())
+                .address(dto.getAddress())
+                .rank(dto.getRank())
+                .build();
+
         return member;
     }
-    default MemberDTO EntityToDto(Member member){
+    default MemberDTO entityToDto(Member member){
         MemberDTO memberDTO = MemberDTO.builder()
                 .memberId(member.getMemberId())
                 .password(member.getPassword())
@@ -34,6 +33,8 @@ public interface MemberService {
                 .build();
         return memberDTO;
     }
-    Page<MemberDTO> getMemberList();
+    Page<MemberDTO> getMemberList(int page);
 
+    MemberDTO read(String memberID);
+    boolean signUp(MemberDTO memberDTO);
 }
