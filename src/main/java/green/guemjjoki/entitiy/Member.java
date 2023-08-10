@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Table(name="member")
 @Getter
@@ -46,5 +48,6 @@ public class Member{
 	private Rank rank;
 	
 	@OneToMany(mappedBy = "writer")
-	private TodoBoard todoBoard;
+	private List<TodoBoard> todoBoard;
+	//oneToMany 1 : N 관게니까 게시물 글은 여러개라 List Type 이여야겠죠~
 }
