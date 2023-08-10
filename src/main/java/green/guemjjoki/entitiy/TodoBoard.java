@@ -1,4 +1,4 @@
-package green.guemjjoki.entitiy.Enum;
+package green.guemjjoki.entitiy;
 
 import jakarta.persistence.Entity;
 
