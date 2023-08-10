@@ -1,0 +1,77 @@
+[33mcommit 1530b0dc8eacd3981bb9603dd1bf4cf6e76bb963[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m
+Author: wjdrnrdl97 <vkvk1069@gmail.com>
+Date:   Thu Aug 10 15:20:36 2023 +0900
+
+    Package Created
+
+[33mcommit df4f2dc3ef9821d589efee2fecf7c9f3fd49ade2[m
+Author: wjdrnrdl97 <vkvk1069@gmail.com>
+Date:   Thu Aug 10 15:19:42 2023 +0900
+
+    Package Created
+
+[33mcommit 8d8c9745bd5fffa37c0b8fd383aa5c2282dda92d[m[33m ([m[1;31morigin/develop[m[33m)[m
+Author: wjdrnrdl97 <vkvk1069@gmail.com>
+Date:   Thu Aug 10 15:05:07 2023 +0900
+
+    Member Entity created
+
+[33mcommit 744f90e96fa1990eee24cb658b117a0328a85dd4[m
+Author: kdh93 <93umsongaji@gmail.com>
+Date:   Thu Aug 10 14:37:59 2023 +0900
+
+    todo board enitity created
+
+[33mcommit 303baa06e85251e5b826284651fab6d2ec708713[m
+Merge: 12f2ffd e11d63c
+Author: SHIN-HANBEEN <122966135+SHIN-HANBEEN@users.noreply.github.com>
+Date:   Wed Aug 9 16:31:11 2023 +0900
+
+    Merge pull request #4 from kwon93/develop
+    
+    h2 database use
+
+[33mcommit e11d63c9ef80376e053af876d35dcb6a58d91f70[m
+Author: kdh93 <93umsongaji@gmail.com>
+Date:   Wed Aug 9 16:29:33 2023 +0900
+
+    h2 database use
+
+[33mcommit 12f2ffd4b7fe7de5964db61068c86c72f2b63cad[m
+Merge: 8420993 a69e5ae
+Author: SHIN-HANBEEN <122966135+SHIN-HANBEEN@users.noreply.github.com>
+Date:   Wed Aug 9 15:30:10 2023 +0900
+
+    Merge pull request #3 from kwon93/develop
+    
+    Develop
+
+[33mcommit a69e5aee35a57c2c8ac31c9cc78d01e12639bbfd[m
+Author: kdh93 <93umsongaji@gmail.com>
+Date:   Wed Aug 9 15:29:06 2023 +0900
+
+    pull3333
+
+[33mcommit db6c4439ba8f07f1dbf5a077898ccc33ae56c69a[m
+Author: kdh93 <93umsongaji@gmail.com>
+Date:   Wed Aug 9 15:23:58 2023 +0900
+
+    333
+
+[33mcommit f08bc267025e5212c9cca9b91671593539d936a1[m
+Author: kdh93 <93umsongaji@gmail.com>
+Date:   Wed Aug 9 15:21:12 2023 +0900
+
+    pull 2
+
+[33mcommit 4db9a56d5dd060766ac06d37ca64cf2f0945e248[m
+Author: kdh93 <93umsongaji@gmail.com>
+Date:   Wed Aug 9 15:13:05 2023 +0900
+
+    pull request
+
+[33mcommit 8420993b170ef609df3125218ffd6c603406fe0e[m
+Author: Ben <shb0801@naver.com>
+Date:   Wed Aug 9 14:51:43 2023 +0900
+
+    '09August2023' Initialization

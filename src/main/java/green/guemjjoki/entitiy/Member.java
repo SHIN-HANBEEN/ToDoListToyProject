@@ -1,7 +1,7 @@
 package green.guemjjoki.entitiy;
 
-import green.guemjjoki.entitiy.Enum.Gender;
-import green.guemjjoki.entitiy.Enum.Role;
+import green.guemjjoki.entitiy.entityEnum.Gender;
+import green.guemjjoki.entitiy.entityEnum.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
