@@ -20,8 +20,7 @@ public class TodoBoard {
     @Column(name = "todo_no")
     private Long todoNo;
 
-    @Column(length = 20, nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member writer;
 
