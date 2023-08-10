@@ -1,7 +1,7 @@
 package green.guemjjoki.entitiy;
 
 import green.guemjjoki.entitiy.entityEnum.Gender;
-import green.guemjjoki.entitiy.entityEnum.Role;
+import green.guemjjoki.entitiy.entityEnum.Rank;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -28,7 +28,7 @@ public class Member{
 	
 	@Id
 	@Column(length=15)
-	private String id;
+	private String member_id;
 	
 	@Column(length=20,nullable = false)
 	private String password;
@@ -48,5 +48,8 @@ public class Member{
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)  // 회원 및 관리자 구분 Enum 사용
-	private Role role;
+	private Rank rank;
+	
+//	@OneToMany(mappedBy = writer)
+//	private TodoBoard todoBoard;
 }

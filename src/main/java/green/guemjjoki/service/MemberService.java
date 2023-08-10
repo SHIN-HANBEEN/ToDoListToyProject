@@ -1,5 +1,8 @@
 package green.guemjjoki.service;
 
-public class MemberService {
+import org.springframework.stereotype.Service;
+
+@Service
+public interface MemberService {
 
 }
