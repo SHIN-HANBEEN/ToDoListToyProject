@@ -16,7 +16,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class MemberDTO {
-	private String member_id;
+	private String memberId;
 	private String password;
 	private String email;
 	private Gender gender;

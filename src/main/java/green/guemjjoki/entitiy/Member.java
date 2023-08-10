@@ -23,7 +23,7 @@ public class Member{
 	
 	@Id
 	@Column(length=15)
-	private String member_id; //memerId로 바꿔주세요~
+	private String memberId;
 	
 	@Column(length=20,nullable = false)
 	private String password;
