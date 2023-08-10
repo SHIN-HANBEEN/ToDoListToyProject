@@ -2,12 +2,7 @@ package green.guemjjoki.entitiy;
 
 import green.guemjjoki.entitiy.entityEnum.Gender;
 import green.guemjjoki.entitiy.entityEnum.Rank;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,7 +23,7 @@ public class Member{
 	
 	@Id
 	@Column(length=15)
-	private String member_id;
+	private String member_id; //memerId로 바꿔주세요~
 	
 	@Column(length=20,nullable = false)
 	private String password;
@@ -50,6 +45,6 @@ public class Member{
 	@Column(nullable = false)  // 회원 및 관리자 구분 Enum 사용
 	private Rank rank;
 	
-//	@OneToMany(mappedBy = writer)
-//	private TodoBoard todoBoard;
+	@OneToMany(mappedBy = "writer")
+	private TodoBoard todoBoard;
 }
