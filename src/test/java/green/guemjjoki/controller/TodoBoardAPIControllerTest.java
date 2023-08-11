@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -50,22 +51,18 @@ class TodoBoardAPIControllerTest {
     @BeforeEach //각 단위 테스트가 실행하기전마다 실행되는 annotation
     public void setMockMvc(){
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context).build(); //mock 생성
+
+
+
+
+    }
+    @AfterEach
+    public void deleteRepository(){
         todoBoardRepository.deleteAll();
         memberRepository.deleteAll();
         //다음 테스트에 영향을 주지 않기위해 db 전부 삭제
 
     }
-
-    @Test
-    @DisplayName("test")
-    void test() throws Exception{
-        //given
-
-        //when
-        //then
-    }
-
-
 
     @Test
     @DisplayName("createTodoList(): todoList 컨트롤러을 이용해  글 생성에 성공하기")
@@ -106,5 +103,46 @@ class TodoBoardAPIControllerTest {
 
         assertThat(todoBoardList.size()).isEqualTo(1);
         assertThat(todoBoardList.get(0).getContent()).isEqualTo(content);
+    }
+
+    @Test
+    @DisplayName("getTodoList(): get요청으로 글 목록 조회시 2개이상 조회완료에 성공하기")
+    void test2() throws Exception{
+        //given
+        String userId = "userA";
+        String userName = "kim";
+        String userPw = "1234";
+        String userEmail = "abc@naver.com";
+        Member userA = Member.builder()
+                .memberId(userId)
+                .name(userName)
+                .password(userPw)
+                .email(userEmail)
+                .gender(Gender.MALE)
+                .rank(Rank.ROLE_USER)
+                .build();
+        memberRepository.save(userA);
+
+
+
+        String url = "/api/todolist";
+        String title1 = "abc";
+        String content1 = "test1";
+        String title2 = "def";
+        String content2 = "test2";
+        final AddTodoListDTO userRequest1 = new AddTodoListDTO(userA,title1,content1);
+        final AddTodoListDTO userRequest2 = new AddTodoListDTO(userA,title2,content2);
+        todoBoardService.boardSave(userRequest1);
+        todoBoardService.boardSave(userRequest2);
+        //when
+        ResultActions result = mockMvc.perform(get(url).accept(MediaType.APPLICATION_JSON));
+        //then
+        List<TodoBoard> allTodos = todoBoardRepository.findAll();
+
+        assertThat(allTodos.size()).isEqualTo(2);
+
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].content").value(content1))
+                .andExpect(jsonPath("$[1].content").value(content2));
     }
 }

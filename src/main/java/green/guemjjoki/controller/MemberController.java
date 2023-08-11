@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MemberController {
 	@Autowired
     MemberService memberService;
-@GetMapping("/list")
-    public void list(@RequestParam(defaultValue = "0")int page, Model model){
-    Page<MemberDTO> listPage = memberService.getMemberList(page);
-    model.addAttribute("listPage", listPage);
-}
+
+    @GetMapping("/list")
+        public void list(@RequestParam(defaultValue = "0")int page, Model model){
+        Page<MemberDTO> listPage = memberService.getMemberList(page);
+        model.addAttribute("listPage", listPage);
+    }
 
 }
