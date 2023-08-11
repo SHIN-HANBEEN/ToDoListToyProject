@@ -26,7 +26,7 @@ public class Member{
 	
 	@Id
 	@Column(length=15)
-	private String memberId;
+	private String memberNo;
 	
 	@Column(length=20,nullable = false)
 	private String password;
@@ -50,7 +50,7 @@ public class Member{
 	
 	@OneToMany(mappedBy = "writer")
 	private List<TodoBoard> todoBoard;
-	//oneToMany 1 : N 관게니까 게시물 글은 여러개라 List Type 이여야겠죠~
+	//oneToMany 1 : N 관계니까 게시물 글은 여러개라 List Type 이여야겠죠~
 
 
 }

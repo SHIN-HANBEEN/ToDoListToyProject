@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 public interface MemberService {
     default Member dtoToEntity(MemberDTO dto){
         Member member = Member.builder()
-                .memberId(dto.getMemberId())
+                .memberNo(dto.getMemberNo())
                 .password(dto.getPassword())
                 .email(dto.getEmail())
                 .gender(dto.getGender())
@@ -23,7 +23,7 @@ public interface MemberService {
     }
     default MemberDTO entityToDto(Member member){
         MemberDTO memberDTO = MemberDTO.builder()
-                .memberId(member.getMemberId())
+                .memberNo(member.getMemberNo())
                 .password(member.getPassword())
                 .email(member.getEmail())
                 .gender(member.getGender())
@@ -36,5 +36,6 @@ public interface MemberService {
     Page<MemberDTO> getMemberList(int page);
 
     MemberDTO read(String memberID);
-    boolean signUp(MemberDTO memberDTO);
+
+    boolean register(MemberDTO memberDTO);
 }

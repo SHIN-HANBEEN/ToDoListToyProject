@@ -76,7 +76,7 @@ class TodoBoardAPIControllerTest {
         String userPw = "1234";
         String userEmail = "abc@naver.com";
         Member userA = Member.builder()
-                .memberId(userId)
+                .memberNo(userId)
                 .name(userName)
                 .password(userPw)
                 .email(userEmail)

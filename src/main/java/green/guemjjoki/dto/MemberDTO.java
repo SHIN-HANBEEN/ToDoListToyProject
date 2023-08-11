@@ -17,12 +17,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class MemberDTO {
-	private String memberId;
+	private String memberNo;
 	private String password;
 	private String email;
 	private Gender gender;
 	private String name;
 	private String address;
 	private Rank rank;
-
 }

@@ -19,7 +19,7 @@ public class MemberRepositoryTest {
 	@Test
 	public void test1() {
 		Member member = Member.builder()
-				.memberId("userA")
+				.memberNo("userA")
 				.password("1234")
 				.gender(Gender.FEMALE)
 				.name("테스트")
