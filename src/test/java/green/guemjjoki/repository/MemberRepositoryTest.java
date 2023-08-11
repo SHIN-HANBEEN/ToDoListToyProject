@@ -25,7 +25,7 @@ class MemberRepositoryTest {
         //given
         Member user = Member.builder()
                 .name("a")
-                .member_id("a")
+                .memberId("a")
                 .email("aa")
                 .address("a")
                 .rank(Rank.ROLE_USER)

@@ -10,14 +10,14 @@ import green.guemjjoki.repository.MemberRepository;
 import green.guemjjoki.repository.TodoBoardRepository;
 import green.guemjjoki.service.TodoBoardService;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -26,6 +26,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
@@ -53,17 +54,21 @@ class TodoBoardAPIControllerTest {
         memberRepository.deleteAll();
         //다음 테스트에 영향을 주지 않기위해 db 전부 삭제
 
+    }
 
+    @Test
+    @DisplayName("test")
+    void test() throws Exception{
+        //given
 
-
-
+        //when
+        //then
     }
 
 
 
-
     @Test
-    @DisplayName("createTodoList(): todoList 글 생성에 성공하기")
+    @DisplayName("createTodoList(): todoList 컨트롤러을 이용해  글 생성에 성공하기")
     void test1() throws Exception{
         //given
         String userId = "userA";
@@ -71,7 +76,7 @@ class TodoBoardAPIControllerTest {
         String userPw = "1234";
         String userEmail = "abc@naver.com";
         Member userA = Member.builder()
-                .member_id(userId)
+                .memberId(userId)
                 .name(userName)
                 .password(userPw)
                 .email(userEmail)
@@ -99,6 +104,7 @@ class TodoBoardAPIControllerTest {
 
         List<TodoBoard> todoBoardList = todoBoardRepository.findAll();
 
-        Assertions.assertThat(todoBoardList.size()).isEqualTo(1);
+        assertThat(todoBoardList.size()).isEqualTo(1);
+        assertThat(todoBoardList.get(0).getContent()).isEqualTo(content);
     }
 }
