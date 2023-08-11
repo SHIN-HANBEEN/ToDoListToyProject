@@ -1,2 +1,1 @@
-CREATE TABLE test (test VARCHAR(20) PRIMARY KEY)
-INSERT INTO test VALUES('aaaa')
+INSERT INTO MEMBER VALUES ('testUser','aaaa','aaaa','aaaa','aaaa','MALE','ROLE_USER');
