@@ -4,6 +4,7 @@ import green.guemjjoki.dto.MemberDTO;
 import green.guemjjoki.entitiy.Member;
 import green.guemjjoki.repository.MemberRepository;
 import green.guemjjoki.service.MemberService;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,7 @@ import java.util.OptionalInt;
 
 @Service
 @Slf4j
+@Setter
 public class MemberServiceImplement implements MemberService {
     @Autowired
     MemberRepository memberRepository;

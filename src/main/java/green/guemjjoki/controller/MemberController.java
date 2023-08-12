@@ -23,6 +23,7 @@ public class MemberController {
     public String list(@RequestParam(defaultValue = "0") int page, Model model){
     Page<MemberDTO> listPage = memberService.getMemberList(page);
     model.addAttribute("listPage", listPage);
+
     return "member/list";
     }
 

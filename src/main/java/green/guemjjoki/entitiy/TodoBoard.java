@@ -1,5 +1,9 @@
 package green.guemjjoki.entitiy;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -21,7 +25,7 @@ public class TodoBoard {
     private Long todoNo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "memberNo")
     private Member writer;
 
     @Column(length = 20 , nullable = false)
@@ -42,4 +46,14 @@ public class TodoBoard {
         this.title = title;
         this.content = content;
     }
+
+    /**
+     * 연관관계 편의 메서드 (Member에도 todoBoard에 member추가시, todoBoard 객체를 추가해줌.)
+     * @param writer
+     */
+    public void setWriter(Member writer) {
+        this.writer = writer;
+        writer.getTodoBoard().add(this);
+    }
+
 }

@@ -1,5 +1,6 @@
 package green.guemjjoki.entitiy;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import green.guemjjoki.dto.MemberDTO;
 import green.guemjjoki.entitiy.entityEnum.Gender;
 import green.guemjjoki.entitiy.entityEnum.Rank;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,8 +22,6 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-
 public class Member{
 	
 	@Id
@@ -49,8 +49,18 @@ public class Member{
 	private Rank rank;
 	
 	@OneToMany(mappedBy = "writer")
-	private List<TodoBoard> todoBoard;
-	//oneToMany 1 : N 관계니까 게시물 글은 여러개라 List Type 이여야겠죠~
+	private List<TodoBoard> todoBoard = new ArrayList<>();
 
 
+
+	@Builder
+	public Member(String memberNo, String password, String email, Gender gender, String name, String address, Rank rank) {
+		this.memberNo = memberNo;
+		this.password = password;
+		this.email = email;
+		this.gender = gender;
+		this.name = name;
+		this.address = address;
+		this.rank = rank;
+	}
 }
