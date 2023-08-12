@@ -44,6 +44,10 @@ public class MemberAPIControllerTest {
     void memberListTest() throws Exception {
         String memberNo = "user1";
     }
+    @Test
+    @DisplayName("register : member컨트롤러 이용하여 신규회원 등록하기")
+    void test01() throws Exception{
 
+    }
 
 }

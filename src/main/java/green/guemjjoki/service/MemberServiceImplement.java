@@ -4,7 +4,6 @@ import green.guemjjoki.dto.MemberDTO;
 import green.guemjjoki.entitiy.Member;
 import green.guemjjoki.repository.MemberRepository;
 import green.guemjjoki.service.MemberService;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +21,6 @@ import java.util.OptionalInt;
 
 @Service
 @Slf4j
-@Setter
 public class MemberServiceImplement implements MemberService {
     @Autowired
     MemberRepository memberRepository;
@@ -40,24 +38,14 @@ public class MemberServiceImplement implements MemberService {
         return null;
     }
 
+    /* 회원가입 시 Validation 유효성 검사로 중복을 확인하기에
+    *  Boolean타입 대신 Member 반환되게 수정
+    * */
     @Override
-    public boolean register(MemberDTO memberDTO) {
-        String memberNo = memberDTO.getMemberNo();
-
-        Optional<Member> getDto = memberRepository.findById(memberNo);
-        if (getDto.isPresent()) {
-            log.info("사용 중인 아이디입니다.");
-            return false;
-        }
-
+    public Member register(MemberDTO memberDTO) {
         Member memberEntity = dtoToEntity(memberDTO);
-
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashpassword = passwordEncoder.encode(memberEntity.getPassword());
-        memberEntity.setPassword(hashpassword);
-
-        memberRepository.save(memberEntity);
-        return true;
+        memberEntity.setPassword(new BCryptPasswordEncoder().encode(memberEntity.getPassword()));
+        return memberRepository.save(memberEntity);
     }
 
 

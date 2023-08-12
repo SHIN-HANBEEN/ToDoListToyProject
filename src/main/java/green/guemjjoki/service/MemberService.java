@@ -37,5 +37,5 @@ public interface MemberService {
 
     MemberDTO read(String memberID);
 
-    boolean register(MemberDTO memberDTO);
+    Member register(MemberDTO memberDTO);
 }

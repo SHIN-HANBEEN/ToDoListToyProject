@@ -2,6 +2,7 @@ package green.guemjjoki.dto;
 
 import green.guemjjoki.entitiy.Member;
 import green.guemjjoki.entitiy.TodoBoard;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
