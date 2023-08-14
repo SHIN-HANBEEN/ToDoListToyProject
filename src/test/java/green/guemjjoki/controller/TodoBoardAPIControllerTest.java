@@ -35,7 +35,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
-@SpringBootTest
+@SpringBootTest(properties = "spring.autoconfigure." +
+        "exclude=org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration")
 @AutoConfigureMockMvc //실제 HTTP 요청과 응답을 시뮬레이션하여 컨트롤러의 동작을 테스트할 수 있게 해주는 annotation
 class TodoBoardAPIControllerTest {
 

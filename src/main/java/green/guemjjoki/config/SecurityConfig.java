@@ -46,7 +46,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                                .requestMatchers(new AntPathRequestMatcher("/public/**")) // 일반 URL 패턴에 대해 접근 허용
+                                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll() // 일반 URL 패턴에 대해 접근 허용
 //                        .requestMatchers("/register", "/login", "/api/**").permitAll() // 누구나 접근 가능
 //                        .requestMatchers("/member/**").hasRole("ROLE_ADMIN")
 //                        .anyRequest().authenticated()  // 설정 이외의 경로는 인증객체만 접근
