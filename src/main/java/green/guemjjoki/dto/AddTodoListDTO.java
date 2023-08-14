@@ -2,20 +2,20 @@ package green.guemjjoki.dto;
 
 import green.guemjjoki.entitiy.Member;
 import green.guemjjoki.entitiy.TodoBoard;
+import green.guemjjoki.repository.MemberRepository;
+import green.guemjjoki.repository.TodoBoardRepository;
 import jakarta.servlet.http.HttpSession;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@AllArgsConstructor
-@NoArgsConstructor
+import java.util.Optional;
+
 @Getter
-@Builder
 public class AddTodoListDTO {
 
+
     private Long no;
-    private Member writer;
+    private String  writer;
     private String title;
     private String content;
 

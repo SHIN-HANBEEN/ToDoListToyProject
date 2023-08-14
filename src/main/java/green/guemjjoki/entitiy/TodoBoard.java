@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import green.guemjjoki.repository.MemberRepository;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,10 +15,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
 public class TodoBoard {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +43,8 @@ public class TodoBoard {
     private LocalDateTime modDate;
 
     @Builder
-    public TodoBoard(Long todoNo,Member writer, String title, String content) {
+    public TodoBoard(Long todoNo,String  writer, String title, String content) {
+
         this.todoNo = todoNo;
         this.writer = writer;
         this.title = title;

@@ -37,7 +37,7 @@ public class TodoBoardAPIController {
         return ResponseEntity.ok().body(todoList);
     }
 
-    @GetMapping(value = "/api/todolist/{todoNo}")
+    @GetMapping("/api/todolist/{todoNo}")
     public ResponseEntity<TodoListDetailViewDTO> getDetailView(@PathVariable Long todoNo){
         TodoBoard detailView = todoBoardService.getDetailView(todoNo);
         return ResponseEntity.ok().body(new TodoListDetailViewDTO(detailView));
