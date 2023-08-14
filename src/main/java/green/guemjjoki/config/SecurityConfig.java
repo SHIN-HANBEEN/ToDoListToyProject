@@ -1,7 +1,6 @@
 package green.guemjjoki.config;
 
 
-import green.guemjjoki.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.security.ConditionalOnDefaultWebSecurity;
@@ -21,11 +20,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity /* Security 활성화 */
-
-
 public class SecurityConfig {
 
-    private final UserDetailsServiceImpl userDetailsService;
+//    private final UserDetailsServiceImpl userDetailsService;
 
     @Bean
     public BCryptPasswordEncoder encoder() {

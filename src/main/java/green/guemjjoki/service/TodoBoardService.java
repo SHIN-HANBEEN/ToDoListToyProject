@@ -1,12 +1,15 @@
 package green.guemjjoki.service;
 
 import green.guemjjoki.dto.AddTodoListDTO;
+import green.guemjjoki.dto.ModifyTodoListDTO;
 import green.guemjjoki.entitiy.TodoBoard;
 import green.guemjjoki.repository.TodoBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.plaf.PanelUI;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +24,16 @@ public class TodoBoardService {
     public List<TodoBoard> getTodoList(){
         List<TodoBoard> todoList = todoBoardRepository.findAll();
         return todoList;
+    }
+
+    public TodoBoard getDetailView(Long no){
+        return todoBoardRepository.findById(no)
+                .orElseThrow(() -> new IllegalArgumentException(" 잘못된 게시글 번호입니다. notFound : " + no));
+    }
+
+    public TodoBoard UpdateTodoList(Long no, ModifyTodoListDTO dto){
+        TodoBoard todoBoard = todoBoardRepository.findById(no).orElseThrow(() -> new IllegalArgumentException(" 잘못된 게시글 번호입니다. notFound : " + no));
+        todoBoard.update(dto.getTitle(), dto.getContent());
+        return todoBoard;
     }
 }

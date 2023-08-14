@@ -56,4 +56,10 @@ public class TodoBoard {
         writer.getTodoBoard().add(this);
     }
 
+    //1차 캐시를 비교해 값이 변경되면 영속성 컨텍스트에서 변경감지를해 플러시할 때 Upate 쿼리가 날라감~
+    public void update(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
+
 }

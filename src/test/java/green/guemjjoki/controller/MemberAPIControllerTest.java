@@ -23,6 +23,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+
 @SpringBootTest
 @AutoConfigureMockMvc // 실제 HTTP 요청과 응답을 시뮬레이션하여 컨트롤러의 동작을 테스트할 수 있게 해주는 애노테이션
 public class MemberAPIControllerTest {
@@ -80,7 +84,7 @@ public class MemberAPIControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody));
     //then
-        result.andExpect(status().isCreated);
+        result.andExpect(status().isCreated());
     }
 
 }
