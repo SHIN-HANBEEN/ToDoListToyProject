@@ -1,6 +1,7 @@
 package green.guemjjoki.controller;
 
 import green.guemjjoki.dto.AddTodoListDTO;
+import green.guemjjoki.dto.ModifyTodoListDTO;
 import green.guemjjoki.dto.TodoListDetailViewDTO;
 import green.guemjjoki.dto.TodoListViewDTO;
 import green.guemjjoki.entitiy.TodoBoard;
@@ -41,6 +42,11 @@ public class TodoBoardAPIController {
         return ResponseEntity.ok().body(new TodoListDetailViewDTO(detailView));
     }
 
+    @PutMapping("/api/todolist/{no}")
+    public ResponseEntity<TodoBoard> updateDetailView(@PathVariable("no") Long no, @RequestBody ModifyTodoListDTO dto){
+        TodoBoard todoBoard = todoBoardService.UpdateTodoList(no, dto);
+        return ResponseEntity.status(HttpStatus.valueOf(201)).body(todoBoard);
+    }
 
 
 }

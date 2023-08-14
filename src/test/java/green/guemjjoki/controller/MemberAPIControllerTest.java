@@ -2,6 +2,8 @@ package green.guemjjoki.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import green.guemjjoki.dto.MemberDTO;
+import green.guemjjoki.entitiy.Member;
+import green.guemjjoki.entitiy.TodoBoard;
 import green.guemjjoki.entitiy.entityEnum.Gender;
 import green.guemjjoki.entitiy.entityEnum.Rank;
 import green.guemjjoki.repository.MemberRepository;
@@ -18,12 +20,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
-
+//
+//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -32,7 +37,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MemberAPIControllerTest {
     @Autowired
     MemberService memberService;
-
     @Autowired
     MemberRepository memberRepository;
 
@@ -77,14 +81,28 @@ public class MemberAPIControllerTest {
         String password = "1234";
         Gender gender = Gender.MALE;
         Rank rank = Rank.ROLE_ADMIN;
-        final MemberDTO user = MemberDTO.builder().memberNo(memberNo).password(password).gender(gender).rank(rank).build();
+        String userName = "TestMan";
+        final MemberDTO user = MemberDTO.builder().memberNo(memberNo).name(userName).password(password).gender(gender).rank(rank).build();
         String requestBody = objectMapper.writeValueAsString(user);  // json으로 직렬화
     //when
         ResultActions result = mockMvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody));
+
+        MvcResult mvcResult = result.andReturn(); // 요청 수행 및 결과 반환
+
+        // 로그로 응답 JSON 출력
+        String responseBody = mvcResult.getResponse().getContentAsString();
+        System.out.println("응답 JSON: " + responseBody);
     //then
-        result.andExpect(status().isCreated());
+        Member member = memberRepository.findById("test").get();
+
+        result
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.memberNo").value(member.getMemberNo()))
+                .andExpect(jsonPath("$.rank").value("ROLE_ADMIN"));
+
+
     }
 
 }
