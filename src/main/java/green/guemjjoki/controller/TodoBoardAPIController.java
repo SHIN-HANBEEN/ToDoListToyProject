@@ -26,10 +26,10 @@ public class TodoBoardAPIController {
     @PostMapping("/api/todolist")
     public ResponseEntity<TodoBoard> createTodoList(@RequestBody AddTodoListDTO todoListDTO){
         TodoBoard savedTodo = todoBoardService.boardSave(todoListDTO);
-
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(savedTodo);
     }
+
 
     @GetMapping("/api/todolist")
     public ResponseEntity<List<TodoListViewDTO>> getTodoList(){
@@ -37,16 +37,16 @@ public class TodoBoardAPIController {
         return ResponseEntity.ok().body(todoList);
     }
 
-    @GetMapping("/api/todolist/{todoNo}")
-    public ResponseEntity<TodoListDetailViewDTO> getDetailView(@PathVariable Long todoNo){
-        TodoBoard detailView = todoBoardService.getDetailView(todoNo);
+    @GetMapping("/api/todolist/{no}")
+    public ResponseEntity<TodoListDetailViewDTO> getDetailView(@PathVariable Long no){
+        TodoBoard detailView = todoBoardService.getDetailView(no);
         return ResponseEntity.ok().body(new TodoListDetailViewDTO(detailView));
     }
 
     @PutMapping(value = "/api/todolist/{no}")
     public ResponseEntity<TodoBoard> updateDetailView(@PathVariable("no") Long no, @RequestBody ModifyTodoListDTO dto){
         TodoBoard todoBoard = todoBoardService.UpdateTodoList(no, dto);
-        return ResponseEntity.status(HttpStatus.valueOf(201)).body(todoBoard);
+        return ResponseEntity.ok().body(todoBoard);
     }
 
 

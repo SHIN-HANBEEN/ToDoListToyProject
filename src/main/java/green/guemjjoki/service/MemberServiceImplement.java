@@ -21,6 +21,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
 
+/**
+ * 멤버 서비스 구현 클래스
+ */
 
 @Service
 @RequiredArgsConstructor
@@ -54,6 +57,8 @@ public class MemberServiceImplement implements MemberService {
         memberEntity.setPassword(new BCryptPasswordEncoder().encode(memberEntity.getPassword()));
         return memberRepository.save(memberEntity);
     }
+
+
 
 
 }

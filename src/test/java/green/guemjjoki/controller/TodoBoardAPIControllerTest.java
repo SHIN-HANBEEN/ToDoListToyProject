@@ -2,6 +2,7 @@ package green.guemjjoki.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import green.guemjjoki.dto.AddTodoListDTO;
+import green.guemjjoki.dto.ModifyTodoListDTO;
 import green.guemjjoki.entitiy.Member;
 import green.guemjjoki.entitiy.TodoBoard;
 import green.guemjjoki.entitiy.entityEnum.Gender;
@@ -76,9 +77,12 @@ class TodoBoardAPIControllerTest {
         //given
         Member member = memberRepository.findById("testUser").get();
         String url = "/api/todolist";
-        String title = "abc";
-        String content = "test1";
-        final AddTodoListDTO userRequest = new AddTodoListDTO(member,title,content);
+        String title = "thirdTitle";
+        String content = "thirdContent";
+        AddTodoListDTO userRequest = AddTodoListDTO.builder()
+                .content(content)
+                .title(title)
+                .build();
 
         String requestBody = objectMapper.writeValueAsString(userRequest);
         //객체를 JSON으로 직렬화 한다. (Post로 오는 요청은 JSON으로 오기때문에 직렬화 해줘야함.)
@@ -94,7 +98,6 @@ class TodoBoardAPIControllerTest {
 
         List<TodoBoard> todoBoardList = todoBoardRepository.findAll();
 
-        assertThat(todoBoardList.size()).isEqualTo(1);
         assertThat(todoBoardList.get(0).getContent()).isEqualTo(content);
     }
 
@@ -104,16 +107,8 @@ class TodoBoardAPIControllerTest {
     void test2() throws Exception{
         //given
         String url = "/api/todolist";
-        String title1 = "첫번째글";
-        String content1 = "첫번째내용";
-        String title2 = "두번째글";
-        String content2 = "두번째내용";
-        Member testUser = memberRepository.findById("testUser").get();
-
-        final AddTodoListDTO userRequest1 = new AddTodoListDTO(0L,testUser,title1,content1);
-        final AddTodoListDTO userRequest2 = new AddTodoListDTO(0L,testUser,title2,content2);
-        todoBoardService.boardSave(userRequest1);
-        todoBoardService.boardSave(userRequest2);
+        String title1 = "testBoard1";
+        String title2 = "testBoard2";
 
         //when
         ResultActions result = mockMvc.perform(get(url).accept(MediaType.APPLICATION_JSON));
@@ -130,35 +125,57 @@ class TodoBoardAPIControllerTest {
                 .andExpect(jsonPath("$[1].title").value(title2));
     }
 
-//    @Test
-//    @DisplayName("getDetailView() : 게시물 단건 조회에 성공하기")
-//    @Transactional
-//    void test3() throws Exception{
-//        //given
-//        final String uri = "/api/todolist/{no}";
-//        final String content = "투두리스트 내용 입니다.";
-//        final String title = "투두리스트 제목 입니다.";
-//        Member member = memberRepository.findById("testUser").get();
-//        AddTodoListDTO savedTodoList = AddTodoListDTO.builder()
-//                .writer(member)
-//                .content(content)
-//                .title(title)
-//                .build();
-//        todoBoardService.boardSave(savedTodoList);
-//
-//        //when
-//        ResultActions result = mockMvc.perform(get(uri, savedTodoList.getNo()));
-//        MvcResult mvcResult = result.andReturn(); // 요청 수행 및 결과 반환
-//
-//        // 로그로 응답 JSON 출력
-//        String responseBody = mvcResult.getResponse().getContentAsString();
-//        System.out.println("응답 JSON: " + responseBody);
-//
-//        //then
-//        result.andExpect(status().isOk())
-//                .andExpect(jsonPath("$.content").value(content))
-//                .andExpect(jsonPath("$.title").value(title));
-//    }
+    @Test
+    @Transactional
+    @DisplayName("getDetailView() : 게시물 단건 조회에 성공하기")
+    void test3() throws Exception{
+        //given
+        final String uri = "/api/todolist/{no}";
+        final String title = "testBoard1";
+        final String content = "HelloWorld1";
+        TodoBoard todoBoard = todoBoardRepository.findById(2L).get();
+
+        //when
+        final ResultActions result = mockMvc.perform(get(uri, todoBoard.getTodoNo()));
+        MvcResult mvcResult = result.andReturn(); // 요청 수행 및 결과 반환
+
+        // 로그로 응답 JSON 출력
+        String responseBody = mvcResult.getResponse().getContentAsString();
+        System.out.println("응답 JSON: " + responseBody);
+
+        //then
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").value(content))
+                .andExpect(jsonPath("$.title").value(title));
+    }
+
+
+    @Test
+    @DisplayName("updateDetailView() : 게시물 수정에 성공하기")
+    void test4() throws Exception{
+        //given
+
+        final String url = "/api/todolist/{no}";
+        final String newTitle = "수정된 제목";
+        final String newContent = "수정된 내용";
+        ModifyTodoListDTO modifyTodoListDTO = ModifyTodoListDTO.builder()
+                .title(newTitle)
+                .content(newContent)
+                .build();
+
+        //when
+        ResultActions result = mockMvc.perform(put(url, 2L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(modifyTodoListDTO)));
+
+        //then
+        result.andExpect(status().isOk());
+        TodoBoard modifiedBoard = todoBoardRepository.findById(2L).get();
+
+        assertThat(modifiedBoard.getContent()).isEqualTo(newContent);
+        assertThat(modifiedBoard.getTitle()).isEqualTo(newTitle);
+
+    }
 
 
 }

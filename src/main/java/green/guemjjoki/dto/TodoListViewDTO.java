@@ -16,12 +16,11 @@ import java.time.LocalDateTime;
 @Getter
 public class TodoListViewDTO {
 
-    private String  writer;
+
     private String title;
     private LocalDateTime modDate;
 
     public TodoListViewDTO(TodoBoard todoBoard){
-            this.writer = todoBoard.getWriter().getMemberNo();
             this.title = todoBoard.getTitle();
             this.modDate = todoBoard.getModDate();
     }

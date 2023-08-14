@@ -33,6 +33,15 @@ public interface MemberService {
                 .build();
         return memberDTO;
     }
+
+
+    /**
+     * 회원 목록을 보여주는 메서드.
+     * 아 오늘 당근 거래가야된다.
+     * @param page
+     * @return 회원정보를 반환하는 dto
+     *
+     */
     Page<MemberDTO> getMemberList(int page);
 
     MemberDTO read(String memberID);

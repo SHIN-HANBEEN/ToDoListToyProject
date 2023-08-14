@@ -1,7 +1,6 @@
 package green.guemjjoki.entitiy;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import green.guemjjoki.dto.MemberDTO;
+
 import green.guemjjoki.entitiy.entityEnum.Gender;
 import green.guemjjoki.entitiy.entityEnum.Rank;
 import jakarta.persistence.*;
@@ -50,8 +49,6 @@ public class Member{
 	
 	@OneToMany(mappedBy = "writer")
 	private List<TodoBoard> todoBoard = new ArrayList<>();
-
-
 
 	@Builder
 	public Member(String memberNo, String password, String email, Gender gender, String name, String address, Rank rank) {

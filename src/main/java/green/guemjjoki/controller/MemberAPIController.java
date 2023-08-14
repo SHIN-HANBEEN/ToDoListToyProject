@@ -20,6 +20,5 @@ public class MemberAPIController {
     public ResponseEntity<Member> register(@RequestBody MemberDTO dto){
         Member registermember = memberService.register(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(registermember);
-
     }
 }
