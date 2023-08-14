@@ -7,4 +7,5 @@ import green.guemjjoki.entitiy.Member;
 import java.util.Optional;
 
 
-public interface MemberRepository extends JpaRepository<Member, String>{ }
+public interface MemberRepository extends JpaRepository<Member, String>{
+}

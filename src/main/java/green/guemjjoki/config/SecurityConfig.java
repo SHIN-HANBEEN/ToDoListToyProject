@@ -1,22 +1,18 @@
 package green.guemjjoki.config;
 
 
-import green.guemjjoki.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
-import org.springframework.boot.autoconfigure.security.ConditionalOnDefaultWebSecurity;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RequiredArgsConstructor
 @Configuration
@@ -39,7 +35,8 @@ public class SecurityConfig {
     @Bean // 시큐리티 적용하지 않을 리소스 설정
     public WebSecurityCustomizer configure(){
         return web ->
-                web.ignoring().requestMatchers(PathRequest.toH2Console()).requestMatchers("/static/**");
+                web.ignoring().requestMatchers(PathRequest.toH2Console());
+//                        .requestMatchers("/static/**");
     }
 
 
@@ -51,19 +48,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                        .requestMatchers("/register", "/login", "/api/**").permitAll() // 누구나 접근 가능
-                        .requestMatchers("/member/**").hasRole("ROLE_ADMIN")
-                        .anyRequest().authenticated()  // 설정 이외의 경로는 인증객체만 접근
+                                .requestMatchers(new AntPathRequestMatcher("/public/**")) // 일반 URL 패턴에 대해 접근 허용
+//                        .requestMatchers("/register", "/login", "/api/**").permitAll() // 누구나 접근 가능
+//                        .requestMatchers("/member/**").hasRole("ROLE_ADMIN")
+//                        .anyRequest().authenticated()  // 설정 이외의 경로는 인증객체만 접근
                 )  // and()메서드가 안되서 람다식으로 메뉴별로 리팩토링
                 .formLogin(formLogin -> formLogin// 로그인 폼 설정
-                        .loginPage("/login")  // 로그인 페이지 경로
-                        .loginProcessingUrl("/api/register") // 로그인 처리 url
+                        .loginProcessingUrl("/login") // 로그인 처리 url
                         .defaultSuccessUrl("/main") // 로그인 성공 시 이동할 페이지 경로
                         .permitAll()
                 )
                 // 로그아웃
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/login")
+                        .logoutSuccessUrl("/login")  // 로그아웃 후 이동페이지
                         .invalidateHttpSession(true)  // 로그아웃 이후 세션 전체 삭제여부
                 )
                 .csrf(csrf->csrf.disable())

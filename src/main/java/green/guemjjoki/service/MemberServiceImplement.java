@@ -4,6 +4,8 @@ import green.guemjjoki.dto.MemberDTO;
 import green.guemjjoki.entitiy.Member;
 import green.guemjjoki.repository.MemberRepository;
 import green.guemjjoki.service.MemberService;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,10 +22,10 @@ import java.util.OptionalInt;
 
 
 @Service
-@Slf4j
+@RequiredArgsConstructor
 public class MemberServiceImplement implements MemberService {
-    @Autowired
-    MemberRepository memberRepository;
+
+    private final MemberRepository memberRepository;
 
     @Override
     public Page<MemberDTO> getMemberList(int page) {
@@ -42,6 +44,7 @@ public class MemberServiceImplement implements MemberService {
     *  Boolean타입 대신 Member 반환되게 수정
     * */
     @Override
+    @Transactional
     public Member register(MemberDTO memberDTO) {
         Member memberEntity = dtoToEntity(memberDTO);
         memberEntity.setPassword(new BCryptPasswordEncoder().encode(memberEntity.getPassword()));
