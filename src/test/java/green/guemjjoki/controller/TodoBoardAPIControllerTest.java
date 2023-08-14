@@ -9,6 +9,7 @@ import green.guemjjoki.entitiy.entityEnum.Rank;
 import green.guemjjoki.repository.MemberRepository;
 import green.guemjjoki.repository.TodoBoardRepository;
 import green.guemjjoki.service.TodoBoardService;
+import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,6 +107,7 @@ class TodoBoardAPIControllerTest {
     }
 
     @Test
+    @Transactional
     @DisplayName("getTodoList(): get요청으로 글 목록 조회시 2개이상 조회완료에 성공하기")
     void test2() throws Exception{
         //given
@@ -114,7 +116,7 @@ class TodoBoardAPIControllerTest {
         String userPw = "1234";
         String userEmail = "abc@naver.com";
         Member userA = Member.builder()
-                .memberId(userId)
+                .memberNo(userId)
                 .name(userName)
                 .password(userPw)
                 .email(userEmail)

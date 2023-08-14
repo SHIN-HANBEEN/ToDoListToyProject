@@ -1,6 +1,7 @@
 package green.guemjjoki.service;
 
 import green.guemjjoki.dto.AddTodoListDTO;
+import green.guemjjoki.entitiy.Member;
 import green.guemjjoki.entitiy.TodoBoard;
 import green.guemjjoki.repository.TodoBoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class TodoBoardService {
     }
 
     public List<TodoBoard> getTodoList(){
-        List<TodoBoard> todoList = todoBoardRepository.findAll();
-        return todoList;
+        return todoBoardRepository.findAll();
     }
+
 }
