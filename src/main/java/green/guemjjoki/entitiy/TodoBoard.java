@@ -41,7 +41,8 @@ public class TodoBoard {
     private LocalDateTime modDate;
 
     @Builder
-    public TodoBoard(Member writer, String title, String content) {
+    public TodoBoard(Long todoNo,Member writer, String title, String content) {
+        this.todoNo = todoNo;
         this.writer = writer;
         this.title = title;
         this.content = content;

@@ -31,6 +31,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 
+import javax.print.DocFlavor;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -76,7 +77,7 @@ class TodoBoardAPIControllerTest {
         String url = "/api/todolist";
         String title = "abc";
         String content = "test1";
-        final AddTodoListDTO userRequest = new AddTodoListDTO(member,title,content);
+        final AddTodoListDTO userRequest = new AddTodoListDTO(0L,member,title,content);
 
         String requestBody = objectMapper.writeValueAsString(userRequest);
         //객체를 JSON으로 직렬화 한다. (Post로 오는 요청은 JSON으로 오기때문에 직렬화 해줘야함.)
@@ -108,8 +109,8 @@ class TodoBoardAPIControllerTest {
         String content2 = "두번째내용";
         Member testUser = memberRepository.findById("testUser").get();
 
-        final AddTodoListDTO userRequest1 = new AddTodoListDTO(testUser,title1,content1);
-        final AddTodoListDTO userRequest2 = new AddTodoListDTO(testUser,title2,content2);
+        final AddTodoListDTO userRequest1 = new AddTodoListDTO(0L,testUser,title1,content1);
+        final AddTodoListDTO userRequest2 = new AddTodoListDTO(0L,testUser,title2,content2);
         todoBoardService.boardSave(userRequest1);
         todoBoardService.boardSave(userRequest2);
 
@@ -126,6 +127,31 @@ class TodoBoardAPIControllerTest {
         result.andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].title").value(title1))
                 .andExpect(jsonPath("$[1].title").value(title2));
+    }
+
+    @Test
+    @DisplayName("getDetailView() : 게시물 단건 조회에 성공하기")
+    @Transactional
+    void test3() throws Exception{
+        //given
+        final String uri = "/api/todolist/{no}";
+        final String content = "투두리스트 내용 입니다.";
+        final String title = "투두리스트 제목 입니다.";
+        Member member = memberRepository.findById("testUser").get();
+        AddTodoListDTO savedTodoList = AddTodoListDTO.builder()
+                .writer(member)
+                .content(content)
+                .title(title)
+                .build();
+        todoBoardService.boardSave(savedTodoList);
+
+        //when
+        ResultActions result = mockMvc.perform(get(uri, savedTodoList.getNo()));
+
+        //then
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").value(content))
+                .andExpect(jsonPath("$.title").value(title));
     }
 
 

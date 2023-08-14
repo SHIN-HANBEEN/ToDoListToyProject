@@ -1,9 +1,11 @@
 package green.guemjjoki.dto;
 
 import green.guemjjoki.entitiy.TodoBoard;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class TodoListDetailViewDTO {
 
     private Long no;

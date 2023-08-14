@@ -101,8 +101,6 @@ public class MemberAPIControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.memberNo").value(member.getMemberNo()))
                 .andExpect(jsonPath("$.rank").value("ROLE_ADMIN"));
-
-
     }
 
 }
