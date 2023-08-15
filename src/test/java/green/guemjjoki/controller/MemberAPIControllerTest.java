@@ -3,7 +3,6 @@ package green.guemjjoki.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import green.guemjjoki.dto.MemberDTO;
 import green.guemjjoki.entitiy.Member;
-import green.guemjjoki.entitiy.TodoBoard;
 import green.guemjjoki.entitiy.entityEnum.Gender;
 import green.guemjjoki.entitiy.entityEnum.Rank;
 import green.guemjjoki.repository.MemberRepository;
@@ -18,18 +17,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
-//
-//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @SpringBootTest
@@ -104,5 +102,19 @@ public class MemberAPIControllerTest {
     }
     @Test
     @Transactional
-    @DisplayName("register : 이미 등록회워")
+    @DisplayName("login : sequrity 적용 로그인하기")
+    void test02()throws Exception{
+        mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
+                .apply(SecurityMockMvcConfigurers.springSecurity())
+                .build();
+        //given
+        String url = "/login";
+        String memberNO = "testUser";
+        String password = "aaaa";
+        //when
+        ResultActions result = mockMvc.perform(formLogin(url).user(memberNO).password(password));
+        //then
+        result.andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/"));
+    }
 }
