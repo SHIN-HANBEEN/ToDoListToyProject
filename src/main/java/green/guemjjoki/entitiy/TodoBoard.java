@@ -47,10 +47,10 @@ public class TodoBoard {
      * 연관관계 편의 메서드 (Member에도 todoBoard에 member추가시, todoBoard 객체를 추가해줌.)
      * @param writer
      */
-    public void setWriter(Member writer) {
-        this.writer = writer;
-        writer.getTodoBoard().add(this);
-    }
+//    public void setWriter(Member writer) {
+//        this.writer = writer;
+//        writer.getTodoBoard().add(this);
+//    }
 
     //1차 캐시를 비교해 값이 변경되면 영속성 컨텍스트에서 변경감지를해 플러시할 때 Upate 쿼리가 날라감~
     public void update(String title, String content){

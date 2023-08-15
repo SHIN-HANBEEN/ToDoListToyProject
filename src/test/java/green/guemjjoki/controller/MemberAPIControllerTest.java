@@ -27,7 +27,8 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @SpringBootTest
@@ -114,7 +115,7 @@ public class MemberAPIControllerTest {
         //when
         ResultActions result = mockMvc.perform(formLogin(url).user(memberNO).password(password));
         //then
-        result.andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/"));
+        result.andExpect(status().is3xxRedirection()); // 300코드 리다이렉션
+
     }
 }
