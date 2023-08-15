@@ -178,4 +178,22 @@ class TodoBoardAPIControllerTest {
     }
 
 
+    @Test
+    @DisplayName("deleteTodolistView() : 게시물 단건 삭제에 성공하기")
+    void test5() throws Exception{
+        //given
+        final String url = "/api/todolist/{no}";
+
+        //when
+        ResultActions result = mockMvc.perform(delete(url, 2L));
+        //then
+        result.andExpect(status().isOk());
+
+        List<TodoBoard> todoBoardList = todoBoardRepository.findAll();
+        assertThat(todoBoardList.size()).isEqualTo(1);
+
+
+    }
+
+
 }

@@ -33,8 +33,17 @@ public class TodoBoardService {
     }
     @Transactional
     public TodoBoard UpdateTodoList(Long no, ModifyTodoListDTO dto){
-        TodoBoard todoBoard = todoBoardRepository.findById(no).orElseThrow(() -> new IllegalArgumentException(" 잘못된 게시글 번호입니다. notFound : " + no));
+        TodoBoard todoBoard = todoBoardRepository.findById(no)
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 게시글 번호입니다. notFound : " + no));
+
         todoBoard.update(dto.getTitle(), dto.getContent());
         return todoBoard;
+    }
+
+    @Transactional
+    public void deleteTodolist(Long no){
+        TodoBoard todoBoard = todoBoardRepository.findById(no)
+                .orElseThrow(() -> new IllegalArgumentException("잘못된 게시글 번호입니다. notFound : "));
+        todoBoardRepository.delete(todoBoard);
     }
 }

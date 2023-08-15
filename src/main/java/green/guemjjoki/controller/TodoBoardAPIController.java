@@ -44,10 +44,17 @@ public class TodoBoardAPIController {
     }
 
     @PutMapping(value = "/api/todolist/{no}")
-    public ResponseEntity<TodoBoard> updateDetailView(@PathVariable("no") Long no, @RequestBody ModifyTodoListDTO dto){
+    public ResponseEntity<TodoBoard> updateDetailView(@PathVariable Long no, @RequestBody ModifyTodoListDTO dto){
         TodoBoard todoBoard = todoBoardService.UpdateTodoList(no, dto);
         return ResponseEntity.ok().body(todoBoard);
     }
+
+    @DeleteMapping("/api/todolist/{no}")
+    public ResponseEntity deleteTodolistView(@PathVariable Long no){
+        todoBoardService.deleteTodolist(no);
+        return ResponseEntity.ok().build();
+    }
+
 
 
 }
