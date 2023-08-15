@@ -27,6 +27,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
 
+/**
+ * 멤버 서비스 구현 클래스
+ */
 
 @Service
 @RequiredArgsConstructor
@@ -43,7 +46,7 @@ public class MemberServiceImplement implements MemberService {
     }
 
     @Override
-        public Member RegisterCheckID(String memberID) {
+        public Member RegisterIDCheck(String memberID) {
         return memberRepository.findById(memberID).orElse(null);
     }
 
@@ -68,33 +71,6 @@ public class MemberServiceImplement implements MemberService {
         }
         return validateResult;
     }
-
-
 }
-
-//    @Override
-//    public MemberDTO read(String memberID) {
-//        Optional<Member> result = memberRepository.findById(memberID);
-//        return result.map(this::entityToDto).orElse(null);
-////        if (result.isPresent()) {
-////            return entityToDto(result.get());
-////        } else {
-////            return null;
-////        } 를 함수형 스타일로 변경
-//    }
-//
-//    @Override
-//    public boolean signUp(MemberDTO memberDTO) {
-//        String id = memberDTO.getMemberId();
-//        MemberDTO existingDto = read(id);
-//
-//        if (existingDto != null) {
-//            System.out.println("사용중인 아이디입니다.");
-//            return false;
-//        }
-//        Member member = dtoToEntity(existingDto);  // always null 고민하기.
-//        memberRepository.save(member);
-//        return true;
-//    }
 
 

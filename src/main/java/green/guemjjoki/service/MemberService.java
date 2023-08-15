@@ -36,21 +36,30 @@ public interface MemberService {
                 .build();
         return memberDTO;
     }
+
+
+    /**
+     * 회원 목록을 보여주는 메서드.
+     * 아 오늘 당근 거래가야된다.
+     * @param page
+     * @return 회원정보를 반환하는 dto
+     *
+     */
     Page<MemberDTO> getMemberList(int page);
 
     /**
      * 회원가입에서 중복회원을 체킹하는 메소드
      * @param memberID : 입력한 아이디값
-     * @return  컨트롤러에서 값 존재 유무체킹으로 확인
+     * @return  Member(Entity) / 컨트롤러에서 값 존재 유무체킹으로 확인
      */
 
     @Transactional
-    Member RegisterCheckID(String memberID);
+    Member RegisterIDCheck(String memberID);
 
     /**
      *
      * @param registerRequestMemberDTO (요청한 입력값)
-     * @return Entity로 변환 후 저장
+     * @return Member(Entity로 변환 후 저장)
      */
 
     Member register(RegisterRequestMemberDTO registerRequestMemberDTO);
@@ -58,7 +67,7 @@ public interface MemberService {
     /**
      * 유효성 검사 핸들링
      * @param errors
-     * @return  Key : valid_{dto 필드명} / message : dto에서 작성한 메세지
+     * @return  Map(Key : valid_{dto 필드명} / message : dto에서 작성한 메세지)
      */
 
     // Errors : 데유효성 검증 과정에서 발생한 에러를 수집하고 관리하기 위해 사용되는 인터페이스

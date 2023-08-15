@@ -102,5 +102,7 @@ public class MemberAPIControllerTest {
                 .andExpect(jsonPath("$.memberNo").value(member.getMemberNo()))
                 .andExpect(jsonPath("$.rank").value("ROLE_ADMIN"));
     }
-
+    @Test
+    @Transactional
+    @DisplayName("register : 이미 등록회워")
 }

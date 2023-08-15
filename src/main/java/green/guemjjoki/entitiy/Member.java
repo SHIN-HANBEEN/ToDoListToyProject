@@ -1,7 +1,6 @@
 package green.guemjjoki.entitiy;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import green.guemjjoki.dto.MemberDTO;
+
 import green.guemjjoki.entitiy.entityEnum.Gender;
 import green.guemjjoki.entitiy.entityEnum.Rank;
 import jakarta.persistence.*;
@@ -21,7 +20,6 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class Member{
 	
 	@Id
@@ -47,7 +45,6 @@ public class Member{
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)  // 회원 및 관리자 구분 Enum 사용
 	private Rank rank;
-
 
 	@Builder
 	public Member(String memberNo, String password, String email, Gender gender, String name, String address, Rank rank) {
