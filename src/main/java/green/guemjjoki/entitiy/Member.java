@@ -47,10 +47,6 @@ public class Member{
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)  // 회원 및 관리자 구분 Enum 사용
 	private Rank rank;
-	
-	@OneToMany(mappedBy = "writer")
-	private List<TodoBoard> todoBoard = new ArrayList<>();
-
 
 
 	@Builder

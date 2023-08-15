@@ -1,6 +1,7 @@
 package green.guemjjoki.controller;
 
 import green.guemjjoki.dto.MemberDTO;
+import green.guemjjoki.dto.RegisterRequestMemberDTO;
 import green.guemjjoki.dto.UserSessionDTO;
 import green.guemjjoki.entitiy.Member;
 import green.guemjjoki.service.MemberService;
@@ -17,7 +18,7 @@ public class MemberAPIController {
     private final MemberService memberService;
 
     @PostMapping("/api/register")
-    public ResponseEntity<Member> register(@RequestBody MemberDTO dto){
+    public ResponseEntity<Member> register(@RequestBody RegisterRequestMemberDTO dto){
         Member registermember = memberService.register(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(registermember);
 

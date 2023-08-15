@@ -1,10 +1,13 @@
 package green.guemjjoki.service;
 
 import green.guemjjoki.dto.MemberDTO;
+import green.guemjjoki.dto.RegisterRequestMemberDTO;
 import green.guemjjoki.entitiy.Member;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
+import org.springframework.validation.Errors;
 
-
+import java.util.Map;
 
 
 public interface MemberService {
@@ -35,7 +38,29 @@ public interface MemberService {
     }
     Page<MemberDTO> getMemberList(int page);
 
-    MemberDTO read(String memberID);
+    /**
+     * 회원가입에서 중복회원을 체킹하는 메소드
+     * @param memberID : 입력한 아이디값
+     * @return  컨트롤러에서 값 존재 유무체킹으로 확인
+     */
 
-    Member register(MemberDTO memberDTO);
+    @Transactional
+    Member RegisterCheckID(String memberID);
+
+    /**
+     *
+     * @param registerRequestMemberDTO (요청한 입력값)
+     * @return Entity로 변환 후 저장
+     */
+
+    Member register(RegisterRequestMemberDTO registerRequestMemberDTO);
+
+    /**
+     * 유효성 검사 핸들링
+     * @param errors
+     * @return  Key : valid_{dto 필드명} / message : dto에서 작성한 메세지
+     */
+
+    // Errors : 데유효성 검증 과정에서 발생한 에러를 수집하고 관리하기 위해 사용되는 인터페이스
+    Map<String,String> validateHandling(Errors errors);
 }
