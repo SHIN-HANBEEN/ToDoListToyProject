@@ -1,7 +1,7 @@
 package green.guemjjoki.service;
 
 import green.guemjjoki.dto.MemberDTO;
-import green.guemjjoki.dto.RegisterRequestMemberDTO;
+//import green.guemjjoki.dto.RegisterRequestMemberDTO;
 import green.guemjjoki.entitiy.Member;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -62,7 +62,7 @@ public interface MemberService {
      * @return Member(Entity로 변환 후 저장)
      */
 
-    Member register(RegisterRequestMemberDTO registerRequestMemberDTO);
+//    Member register(RegisterRequestMemberDTO registerRequestMemberDTO);
 
     /**
      * 유효성 검사 핸들링

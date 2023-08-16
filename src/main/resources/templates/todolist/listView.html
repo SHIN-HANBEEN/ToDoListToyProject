@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Full Width Pics - Start Bootstrap Template</title>
+    </head>
+    <body>
+        <table>
+            <thead>
+            <th>글번호</th>
+            <th>제목</th>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${list}">
+                    <td><a th:href="@{/todolist/read/{no}(no=${item.no})}">[[${item.no}]]</a></td>
+
+                    <td id="title" class="">[[${item.title}]]</td>
+                </tr>
+            </tbody>
+        </table>
+    <button class="createBtn">글 등록</button>
+    </body>
+</html>

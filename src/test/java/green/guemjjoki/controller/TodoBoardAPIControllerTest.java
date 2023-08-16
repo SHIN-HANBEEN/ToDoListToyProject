@@ -64,7 +64,6 @@ class TodoBoardAPIControllerTest {
     }
     @AfterEach
     public void deleteRepository(){
-        todoBoardRepository.deleteAll();
         memberRepository.deleteAll();
         //다음 테스트에 영향을 주지 않기위해 db 전부 삭제
 
@@ -182,7 +181,6 @@ class TodoBoardAPIControllerTest {
     void test5() throws Exception{
         //given
         final String url = "/api/todolist/{no}";
-
         //when
         ResultActions result = mockMvc.perform(delete(url, 2L));
         //then

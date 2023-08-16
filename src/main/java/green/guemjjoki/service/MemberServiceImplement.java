@@ -1,7 +1,7 @@
 package green.guemjjoki.service;
 
 import green.guemjjoki.dto.MemberDTO;
-import green.guemjjoki.dto.RegisterRequestMemberDTO;
+//import green.guemjjoki.dto.RegisterRequestMemberDTO;
 import green.guemjjoki.entitiy.Member;
 import green.guemjjoki.repository.MemberRepository;
 import green.guemjjoki.service.MemberService;
@@ -50,13 +50,13 @@ public class MemberServiceImplement implements MemberService {
         return memberRepository.findById(memberID).orElse(null);
     }
 
-    @Override
-    @Transactional  // DB관련된 작업 진행할 때 / 오류발생 시 모든 작업 원복
-    public Member register(RegisterRequestMemberDTO registerRequestMemberDTO) {
-        Member memberEntity = registerRequestMemberDTO.toEntity();
-        memberEntity.setPassword(new BCryptPasswordEncoder().encode(memberEntity.getPassword()));
-        return memberRepository.save(memberEntity);
-    }
+//    @Override
+//    @Transactional  // DB관련된 작업 진행할 때 / 오류발생 시 모든 작업 원복
+//    public Member register(RegisterRequestMemberDTO registerRequestMemberDTO) {
+//        Member memberEntity = registerRequestMemberDTO.toEntity();
+//        memberEntity.setPassword(new BCryptPasswordEncoder().encode(memberEntity.getPassword()));
+//        return memberRepository.save(memberEntity);
+//    }
 
     @Override
     @Transactional // DB와 관련된 작업을 할 때 사용 / 오류발생 시 모든 작업 원복

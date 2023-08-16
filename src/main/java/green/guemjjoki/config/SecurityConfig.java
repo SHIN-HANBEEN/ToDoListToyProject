@@ -46,12 +46,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-                                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll() // 일반 URL 패턴에 대해 접근 허용
+                                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+//                                .requestMatchers("/static/css/*").permitAll()// 일반 URL 패턴에 대해 접근 허용
 //                        .requestMatchers("/register", "/login", "/api/**").permitAll() // 누구나 접근 가능
 //                        .requestMatchers("/member/**").hasRole("ROLE_ADMIN")
 //                        .anyRequest().authenticated()  // 설정 이외의 경로는 인증객체만 접근
                 )  // and()메서드가 안되서 람다식으로 메뉴별로 리팩토링
                 .formLogin(formLogin -> formLogin// 로그인 폼 설정
+
                         .loginProcessingUrl("/login") // 로그인 처리 url
                         .defaultSuccessUrl("/main") // 로그인 성공 시 이동할 페이지 경로
                         .permitAll()
