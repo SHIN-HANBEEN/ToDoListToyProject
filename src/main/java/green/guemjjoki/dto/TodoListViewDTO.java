@@ -21,7 +21,7 @@ public class TodoListViewDTO {
     private LocalDateTime modDate;
 
     public TodoListViewDTO(TodoBoard todoBoard){
-            this.writer = todoBoard.getWriter().;
+            this.writer = todoBoard.getWriter();
             this.title = todoBoard.getTitle();
             this.modDate = todoBoard.getModDate();
     }
