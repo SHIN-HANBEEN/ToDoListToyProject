@@ -1,6 +1,6 @@
 package green.guemjjoki.entitiy;
 
-import green.guemjjoki.dto.MemberDTO;
+
 import green.guemjjoki.entitiy.entityEnum.Gender;
 import green.guemjjoki.entitiy.entityEnum.Rank;
 import jakarta.persistence.*;
@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,16 +20,13 @@ import java.util.List;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-
 public class Member{
 	
 	@Id
 	@Column(length=15)
 	private String memberNo;
 	
-	@Column(length=20,nullable = false)
+	@Column(nullable = false, length = 200)
 	private String password;
 	
 	@Column(length=40)
@@ -47,10 +45,15 @@ public class Member{
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)  // 회원 및 관리자 구분 Enum 사용
 	private Rank rank;
-	
-	@OneToMany(mappedBy = "writer")
-	private List<TodoBoard> todoBoard;
-	//oneToMany 1 : N 관계니까 게시물 글은 여러개라 List Type 이여야겠죠~
 
-
+	@Builder
+	public Member(String memberNo, String password, String email, Gender gender, String name, String address, Rank rank) {
+		this.memberNo = memberNo;
+		this.password = password;
+		this.email = email;
+		this.gender = gender;
+		this.name = name;
+		this.address = address;
+		this.rank = rank;
+	}
 }

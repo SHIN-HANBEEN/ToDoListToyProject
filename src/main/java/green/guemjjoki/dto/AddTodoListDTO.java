@@ -2,22 +2,27 @@ package green.guemjjoki.dto;
 
 import green.guemjjoki.entitiy.Member;
 import green.guemjjoki.entitiy.TodoBoard;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import green.guemjjoki.repository.MemberRepository;
+import green.guemjjoki.repository.TodoBoardRepository;
+import jakarta.servlet.http.HttpSession;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@AllArgsConstructor
-@NoArgsConstructor
+import java.util.Optional;
+
 @Getter
+@Builder
+@AllArgsConstructor
 public class AddTodoListDTO {
 
-    private Member writer;
+
+    private Long no;
     private String title;
     private String content;
 
     public TodoBoard toEntity(){
         return TodoBoard.builder()
-                .writer(writer)
+                .todoNo(no)
                 .title(title)
                 .content(content)
                 .build();
